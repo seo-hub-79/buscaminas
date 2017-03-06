@@ -12,7 +12,7 @@ public class grillas {
         tablero = new JPanel();
         tablero.setSize(375, 375);
         tablero.setLocation(10, 95);
-        tablero.setBackground(Color.YELLOW);
+        tablero.setBackground(Color.yellow);
     }
 
     public void crear(int x, int y) {

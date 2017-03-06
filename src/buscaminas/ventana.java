@@ -1,5 +1,8 @@
 package buscaminas;
 
+//import UpperEssential.UpperEssentialLookAndFeel;
+//import UpperEssential.UpperTheme;
+//import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -11,8 +14,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class ventana extends JFrame implements ActionListener, KeyListener, MouseListener {
 
@@ -57,7 +60,8 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
     Icon pre;
     sonido son = new sonido();
     boolean fin, ya_gano;
-    puntaje pun = new puntaje();
+    puntaje pun = null;
+    //UpperEssentialLookAndFeel look = new UpperEssentialLookAndFeel();
 
     int n1[] = {1, 1, 0, -1, -1, -1, 0, 1};
     int n2[] = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -119,7 +123,7 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
         if (act_sonido.isSelected()) {
             son.gana();
         }
-        
+
         c.stop();
         try {
             pun.agregar(n, Integer.parseInt(tiempo.getText()));
@@ -346,6 +350,27 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
+        setTitle("Buscaminas");
+
+        /*try {
+            pun = new puntaje();
+        } catch (java.io.IOException e) {
+        }
+
+        UpperTheme ut = new UpperTheme();
+        ut.setPrimary1(Color.red);
+        //ut.setPrimary2(Color.blue);
+        ut.setPrimary3(Color.orange);
+        ut.setSecondary1(Color.green);
+        ut.setSecondary2(Color.LIGHT_GRAY);
+        ut.setSecondary3(Color.cyan);
+        ut.setBlack(Color.magenta);
+        ut.setWhite(Color.yellow);
+        look.setCurrentTheme(ut);
+        try {
+            UIManager.setLookAndFeel(look);
+        } catch (UnsupportedLookAndFeelException e) {
+        }*/
 
         carita.setSize(40, 40);
         carita.setLocation(180, 35);
@@ -411,7 +436,7 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
             return;
         }
         if (evt.getSource() == about) {
-            JOptionPane.showMessageDialog(null, "buscaminas, v1.2");
+            JOptionPane.showMessageDialog(null, "buscaminas, v1.21");
             return;
         }
         if (evt.getSource() == instrucciones) {
@@ -476,6 +501,10 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
             return;
         }
         if (evt.getSource() == puntajes) {
+            if (pun == null) {
+                JOptionPane.showMessageDialog(null, "Puntajes no disponibles");
+                return;
+            }
             pun.mostrar();
         }
         if (evt.getSource() == carita || evt.getSource() == nuevo) {
