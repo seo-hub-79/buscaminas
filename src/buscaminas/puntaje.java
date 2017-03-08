@@ -9,24 +9,23 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class puntaje {
-
-    BufferedReader tec;
+    
     FileWriter f;
     File g;
     int p1, p2, p3;
-    String prin, inte, expe;
-    boolean lectura = true;
+    String prin, inte, expe, ruta;
 
     public puntaje() throws FileNotFoundException, IOException {
-        g = new File("C:\\puntajes_buscaminas");
-        if (!g.exists()) {
-            g.createNewFile();
-        }
-        leer();
-    }
 
-    public void leer() throws IOException {
-        tec = new BufferedReader(new FileReader("C:\\puntajes_buscaminas"));
+        g = new File(System.getProperty("user.dir") + "/info");
+        System.out.println(g.getPath());
+        ruta = g.getPath() + "\\puntajes";
+        if (!g.exists()) {
+            g.mkdirs();
+            reset();
+        }
+
+        BufferedReader tec = new BufferedReader(new FileReader(ruta));
         tec.readLine();
         try {
             String l1[];
@@ -40,40 +39,47 @@ public class puntaje {
             expe = l1[0];
             p3 = Integer.parseInt(l1[1]);
         } catch (Exception e) {
-            f = new FileWriter(g);
-            f.write("puntajes:\r\n");
-            f.append("nnn 999\r\nnnn 999\r\nnnn 999\r\n");
-            f.close();
-            leer();
         }
+    }
+
+    public void reset() throws IOException {
+        f = new FileWriter(ruta);
+        f.write("puntajes:\r\n");
+        f.append("nnn 999\r\nnnn 999\r\nnnn 999\r\n");
+        f.close();
+        
     }
 
     public void mostrar() {
         String m = "principiante: " + prin + " , " + p1;
         m = m + "\nintermedio: " + inte + " , " + p2 + "\nexperto: " + expe + " , " + p3;
-
         JOptionPane.showMessageDialog(null, m, "puntajes", 1);
     }
 
     public void agregar(String niv, int t) throws IOException {
-        f = new FileWriter(g);
+        f = new FileWriter(ruta);
         f.write("puntajes:\r\n");
         if (niv.equals("principiante") && t < p1) {
-            f.write(JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:") + " " + t + "\r\n");
+            prin = JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:");
+            p1 = t;
+            f.write(prin + " " + t + "\r\n");
         } else {
             f.write(prin + " " + p1 + "\r\n");
         }
         if (niv.equals("intermedio") && t < p2) {
-            f.write(JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:") + " " + t + "\r\n");
+            inte = JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:");
+            p2 = t;
+            f.write(inte + " " + t + "\r\n");
         } else {
             f.write(inte + " " + p2 + "\r\n");
         }
         if (niv.equals("experto") && t < p3) {
-            f.write(JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:") + " " + t + "\r\n");
+            expe = JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:");
+            p3 = t;
+            f.write(expe + " " + t + "\r\n");
         } else {
             f.write(expe + " " + p3 + "\r\n");
         }
         f.close();
-        leer();
     }
 }

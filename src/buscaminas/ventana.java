@@ -352,26 +352,27 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
         setResizable(false);
         setTitle("Buscaminas");
 
-        /*try {
+        try {
             pun = new puntaje();
-        } catch (java.io.IOException e) {
+        } catch (Exception e) {
         }
 
-        UpperTheme ut = new UpperTheme();
-        ut.setPrimary1(Color.red);
-        //ut.setPrimary2(Color.blue);
-        ut.setPrimary3(Color.orange);
-        ut.setSecondary1(Color.green);
-        ut.setSecondary2(Color.LIGHT_GRAY);
-        ut.setSecondary3(Color.cyan);
-        ut.setBlack(Color.magenta);
-        ut.setWhite(Color.yellow);
-        look.setCurrentTheme(ut);
-        try {
-            UIManager.setLookAndFeel(look);
-        } catch (UnsupportedLookAndFeelException e) {
-        }*/
-
+        /*
+         UpperTheme ut = new UpperTheme();
+         ut.setPrimary1(Color.red);
+         //ut.setPrimary2(Color.blue);
+         ut.setPrimary3(Color.orange);
+         ut.setSecondary1(Color.green);
+         ut.setSecondary2(Color.LIGHT_GRAY);
+         ut.setSecondary3(Color.cyan);
+         ut.setBlack(Color.magenta);
+         ut.setWhite(Color.yellow);
+         look.setCurrentTheme(ut);
+         try {
+         UIManager.setLookAndFeel(look);
+         } catch (UnsupportedLookAndFeelException e) {
+         }*/
+        
         carita.setSize(40, 40);
         carita.setLocation(180, 35);
         carita_feliz(true);
@@ -436,7 +437,7 @@ public class ventana extends JFrame implements ActionListener, KeyListener, Mous
             return;
         }
         if (evt.getSource() == about) {
-            JOptionPane.showMessageDialog(null, "buscaminas, v1.21");
+            JOptionPane.showMessageDialog(null, "buscaminas, v1.22");
             return;
         }
         if (evt.getSource() == instrucciones) {
