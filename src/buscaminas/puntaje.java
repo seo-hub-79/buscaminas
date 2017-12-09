@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class puntaje {
-    
+
     FileWriter f;
     File g;
     int p1, p2, p3;
@@ -45,9 +45,9 @@ public class puntaje {
     public void reset() throws IOException {
         f = new FileWriter(ruta);
         f.write("puntajes:\r\n");
-        f.append("nnn 999\r\nnnn 999\r\nnnn 999\r\n");
+        f.append("ninguno 999\r\nninguno 999\r\nninguno 999\r\n");
         f.close();
-        
+
     }
 
     public void mostrar() {
@@ -62,6 +62,9 @@ public class puntaje {
         if (niv.equals("principiante") && t < p1) {
             prin = JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:");
             p1 = t;
+            if (prin == null) {
+                prin = "NN";
+            }
             f.write(prin + " " + t + "\r\n");
         } else {
             f.write(prin + " " + p1 + "\r\n");
@@ -69,6 +72,9 @@ public class puntaje {
         if (niv.equals("intermedio") && t < p2) {
             inte = JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:");
             p2 = t;
+            if (inte == null) {
+                inte = "NN";
+            }
             f.write(inte + " " + t + "\r\n");
         } else {
             f.write(inte + " " + p2 + "\r\n");
@@ -76,6 +82,9 @@ public class puntaje {
         if (niv.equals("experto") && t < p3) {
             expe = JOptionPane.showInputDialog("puntaje alto!!!\ninserte su nombre:");
             p3 = t;
+            if (expe == null) {
+                expe = "NN";
+            }
             f.write(expe + " " + t + "\r\n");
         } else {
             f.write(expe + " " + p3 + "\r\n");
